@@ -1,1 +1,343 @@
+import React, { useState, useEffect } from 'react';
+import { ChevronDown } from 'lucide-react';
 
+function Navigation({ currentPage, setCurrentPage, language, setLanguage, t }) {
+  return (
+    <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm shadow-sm z-50">
+      <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div className="flex gap-8">
+          <button 
+            onClick={() => setCurrentPage('home')} 
+            className="text-sm hover:text-gray-600 transition-colors"
+          >
+            {t.nav.why}
+          </button>
+          <button 
+            onClick={() => setCurrentPage('resources')} 
+            className="text-sm hover:text-gray-600 transition-colors"
+          >
+            {t.nav.resources}
+          </button>
+          <button 
+            onClick={() => setCurrentPage('community')} 
+            className="text-sm hover:text-gray-600 transition-colors"
+          >
+            {t.nav.thoughts}
+          </button>
+        </div>
+        <div className="relative">
+          <select
+            value={language}
+            onChange={(e) => setLanguage(e.target.value)}
+            className="text-sm bg-transparent border border-gray-300 rounded px-3 py-1 cursor-pointer hover:border-gray-400 transition-colors appearance-none pr-8"
+          >
+            <option value="en">English</option>
+            <option value="da">Danish</option>
+            <option value="hu">Hungarian</option>
+          </select>
+          <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none text-gray-600" />
+        </div>
+      </div>
+    </nav>
+  );
+}
+
+function Footer({ t }) {
+  return (
+    <footer className="bg-gray-50 py-12 mt-24">
+      <div className="max-w-6xl mx-auto px-6 text-center">
+        <p className="text-sm text-gray-600 mb-4">{t.footer}</p>
+        <p className="text-xs text-gray-500">
+          This work is licensed under a{' '}
+          <a
+            href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-gray-700"
+          >
+            Creative Commons Attribution–NonCommercial–ShareAlike 4.0 International License
+          </a>
+          .
+        </p>
+      </div>
+    </footer>
+  );
+}
+
+function HomePage({ language, t }) {
+  const [beforeReflection, setBeforeReflection] = useState('');
+  const [afterReflection, setAfterReflection] = useState('');
+  const [showBeforeSuccess, setShowBeforeSuccess] = useState(false);
+  const [showAfterSuccess, setShowAfterSuccess] = useState(false);
+
+  const handleBeforeSubmit = () => {
+    if (beforeReflection.trim()) {
+      localStorage.setItem('beforeReflection', beforeReflection);
+      setShowBeforeSuccess(true);
+      setTimeout(() => setShowBeforeSuccess(false), 3000);
+    }
+  };
+
+  const handleAfterSubmit = () => {
+    if (afterReflection.trim()) {
+      localStorage.setItem('afterReflection', afterReflection);
+      const stored = localStorage.getItem('publicReflections');
+      const existing = stored ? JSON.parse(stored) : [];
+      const newReflection = {
+        text: afterReflection,
+        timestamp: Date.now()
+      };
+      const updated = [...existing, newReflection];
+      localStorage.setItem('publicReflections', JSON.stringify(updated));
+      setShowAfterSuccess(true);
+      setTimeout(() => setShowAfterSuccess(false), 3000);
+    }
+  };
+
+  return (
+    <>
+      {/* Hero Section */}
+      <header className="relative h-screen flex items-center justify-center">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: 'url(/public/background.png)',
+            backgroundColor: '#1a1a1a'
+          }}
+        />
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="relative z-10 text-center text-white px-6">
+          <h1 className="text-5xl md:text-7xl font-light mb-6 tracking-wide">
+            {t.hero.title}
+          </h1>
+          <p className="text-xl md:text-2xl font-light opacity-90">
+            {t.hero.subtitle}
+          </p>
+        </div>
+      </header>
+
+      {/* Introduction Section */}
+      <section className="max-w-3xl mx-auto px-6 py-24 text-center">
+        <h2 className="text-3xl font-light mb-8 text-gray-800">{t.intro.title}</h2>
+        <p className="text-lg leading-relaxed text-gray-700">
+          {t.intro.text}
+        </p>
+      </section>
+
+      {/* Before Reflection */}
+      <section className="max-w-2xl mx-auto px-6 py-16">
+        <div className="bg-gray-50 rounded-2xl p-12 shadow-sm">
+          <h3 className="text-2xl font-light mb-8 text-center text-gray-800">
+            {t.beforeQuestion}
+          </h3>
+          <textarea
+            value={beforeReflection}
+            onChange={(e) => setBeforeReflection(e.target.value)}
+            className="w-full h-32 p-4 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all"
+            placeholder="Share your thoughts..."
+          />
+          <button
+            onClick={handleBeforeSubmit}
+            className="mt-6 w-full bg-gray-800 text-white py-3 rounded-lg hover:bg-gray-700 transition-colors"
+          >
+            {t.submit}
+          </button>
+          {showBeforeSuccess && (
+            <p className="mt-4 text-center text-green-600 text-sm">
+              Thank you for sharing your reflection.
+            </p>
+          )}
+        </div>
+      </section>
+
+      {/* Video Section */}
+      <section className="max-w-5xl mx-auto px-6 py-24">
+        <h2 className="text-3xl font-light mb-12 text-center text-gray-800">
+          {t.video.title}
+        </h2>
+        <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+          <video
+            controls
+            className="w-full"
+            style={{ aspectRatio: '16/9' }}
+          >
+            <source src="/public/measuredinmoments.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </section>
+
+      {/* Post-Animation Content */}
+      <section className="max-w-3xl mx-auto px-6 py-24 text-center space-y-12">
+        <div>
+          <h2 className="text-3xl font-light mb-8 text-gray-800">
+            {t.postAnimation.title}
+          </h2>
+          <p className="text-lg leading-relaxed text-gray-700 mb-8">
+            {t.postAnimation.danger}
+          </p>
+          <p className="text-lg leading-relaxed text-gray-700 mb-8">
+            {t.postAnimation.what}
+          </p>
+          <p className="text-lg leading-relaxed text-gray-700">
+            {t.postAnimation.essay}
+          </p>
+        </div>
+      </section>
+
+      {/* After Reflection */}
+      <section className="max-w-2xl mx-auto px-6 py-16">
+        <div className="bg-gray-50 rounded-2xl p-12 shadow-sm">
+          <h3 className="text-2xl font-light mb-8 text-center text-gray-800">
+            {t.afterQuestion}
+          </h3>
+          <textarea
+            value={afterReflection}
+            onChange={(e) => setAfterReflection(e.target.value)}
+            className="w-full h-32 p-4 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all"
+            placeholder="Share your updated thoughts..."
+          />
+          <button
+            onClick={handleAfterSubmit}
+            className="mt-6 w-full bg-gray-800 text-white py-3 rounded-lg hover:bg-gray-700 transition-colors"
+          >
+            {t.submit}
+          </button>
+          {showAfterSuccess && (
+            <p className="mt-4 text-center text-green-600 text-sm">
+              Your reflection has been added to the community section.
+            </p>
+          )}
+        </div>
+      </section>
+    </>
+  );
+}
+
+function ResourcesPage({ t }) {
+  return (
+    <div className="pt-24">
+      <section className="max-w-3xl mx-auto px-6 py-24 text-center">
+        <h2 className="text-3xl font-light mb-12 text-gray-800">
+          {t.resources.title}
+        </h2>
+        <div className="space-y-4">
+          {t.resources.links.map((link, idx) => (
+            <a
+              key={idx}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block text-lg text-gray-700 hover:text-gray-900 underline decoration-1 underline-offset-4 transition-colors"
+            >
+              {link.text}
+            </a>
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function CommunityPage({ t }) {
+  const [publicReflections, setPublicReflections] = useState([]);
+
+  useEffect(() => {
+    const stored = localStorage.getItem('publicReflections');
+    if (stored) {
+      setPublicReflections(JSON.parse(stored));
+    }
+  }, []);
+
+  return (
+    <div className="pt-24">
+      <section className="max-w-4xl mx-auto px-6 py-24">
+        <h2 className="text-3xl font-light mb-12 text-center text-gray-800">
+          {t.reflections.title}
+        </h2>
+        {publicReflections.length === 0 ? (
+          <p className="text-center text-gray-500">{t.reflections.empty}</p>
+        ) : (
+          <div className="space-y-6">
+            {publicReflections.map((reflection, idx) => (
+              <div
+                key={idx}
+                className="bg-gray-50 rounded-xl p-8 shadow-sm"
+              >
+                <p className="text-gray-700 leading-relaxed">{reflection.text}</p>
+                <p className="text-sm text-gray-400 mt-4">
+                  {new Date(reflection.timestamp).toLocaleDateString()}
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
+    </div>
+  );
+}
+
+export default function MeasuredInMoments() {
+  const [language, setLanguage] = useState('en');
+  const [currentPage, setCurrentPage] = useState('home');
+
+  const content = {
+    en: {
+      nav: { why: 'Why?', resources: 'Resources', thoughts: 'What do others think?' },
+      hero: {
+        title: 'Measured in Moments',
+        subtitle: 'A reflection on AI, safety, and human responsibility'
+      },
+      intro: {
+        title: 'Introduction',
+        text: 'Artificial Intelligence Safety is about ensuring that advanced AI systems remain beneficial, aligned with human values, and under human control. As AI becomes more powerful, the decisions we make today will shape our future. This short animation explores a critical moment in AI development—when a researcher discovers something wrong with the system they built. It is a story about choice, responsibility, and the weight of knowing.'
+      },
+      beforeQuestion: 'What would you do if you discovered something was wrong with the AI system you built?',
+      submit: 'Submit',
+      video: {
+        title: 'The Animation',
+        description: 'Watch the story unfold.'
+      },
+      postAnimation: {
+        title: 'Understanding AI Safety',
+        danger: 'Uncontrolled AI systems pose existential risks. As AI capabilities grow, systems could pursue goals misaligned with human welfare, operate beyond our understanding, or resist our attempts to correct them. The challenge is not just building powerful AI—it is building AI we can trust and control.',
+        what: 'AI Safety encompasses alignment (ensuring AI goals match human values), robustness (systems that work safely in all conditions), interpretability (understanding what AI systems are doing), and oversight (maintaining meaningful human control). It requires technical solutions, governance frameworks, and a culture of responsibility.',
+        essay: 'Keep the Future Human reminds us that technology should serve humanity, not replace it. As we develop increasingly powerful AI, we must preserve human agency, dignity, and values. The future is not predetermined—it is shaped by the choices we make now, in moments that matter.'
+      },
+      afterQuestion: 'What would you do differently after knowing everything you know now?',
+      resources: {
+        title: 'Learn More',
+        links: [
+          { text: 'AI Safety Fundamentals', url: 'https://aisafetyfundamentals.com/' },
+          { text: 'Center for AI Safety', url: 'https://safe.ai/' },
+          { text: 'Anthropic Safety Research', url: 'https://www.anthropic.com/safety' }
+        ]
+      },
+      reflections: {
+        title: 'Community Reflections',
+        empty: 'No reflections yet. Be the first to share your thoughts.'
+      },
+      footer: '© 2025 Measured in Moments – A project by Balázs László. Licensed under CC BY-NC-SA 4.0.'
+    }
+  };
+
+  const t = content[language];
+
+  return (
+    <div className="min-h-screen bg-white text-gray-800">
+      <Navigation 
+        currentPage={currentPage} 
+        setCurrentPage={setCurrentPage} 
+        language={language} 
+        setLanguage={setLanguage} 
+        t={t} 
+      />
+      
+      {currentPage === 'home' && <HomePage language={language} t={t} />}
+      {currentPage === 'resources' && <ResourcesPage t={t} />}
+      {currentPage === 'community' && <CommunityPage t={t} />}
+      
+      <Footer t={t} />
+    </div>
+  );
+}
