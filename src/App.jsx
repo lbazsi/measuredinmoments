@@ -1,26 +1,49 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 
-function Navigation({ currentPage, setCurrentPage, language, setLanguage, t }) {
+function Navigation({ currentPage, setCurrentPage, language, setLanguage, t, isScrolled }) {
   return (
-    <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm shadow-sm z-50">
-      <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+    <nav 
+      className={`fixed top-0 w-full transition-all duration-300 z-50 ${
+        isScrolled 
+          ? 'bg-cover bg-center shadow-lg' 
+          : 'bg-white/95 backdrop-blur-sm shadow-sm'
+      }`}
+      style={isScrolled ? {
+        backgroundImage: 'url(/background.png)',
+      } : {}}
+    >
+      <div className={`max-w-6xl mx-auto px-6 py-4 flex justify-between items-center ${
+        isScrolled ? 'backdrop-blur-sm' : ''
+      }`}>
         <div className="flex gap-8">
           <button 
             onClick={() => setCurrentPage('home')} 
-            className="text-sm hover:text-gray-600 transition-colors"
+            className={`text-sm transition-colors ${
+              isScrolled 
+                ? 'text-white hover:text-gray-200' 
+                : 'text-gray-800 hover:text-gray-600'
+            }`}
           >
             {t.nav.why}
           </button>
           <button 
             onClick={() => setCurrentPage('resources')} 
-            className="text-sm hover:text-gray-600 transition-colors"
+            className={`text-sm transition-colors ${
+              isScrolled 
+                ? 'text-white hover:text-gray-200' 
+                : 'text-gray-800 hover:text-gray-600'
+            }`}
           >
             {t.nav.resources}
           </button>
           <button 
             onClick={() => setCurrentPage('community')} 
-            className="text-sm hover:text-gray-600 transition-colors"
+            className={`text-sm transition-colors ${
+              isScrolled 
+                ? 'text-white hover:text-gray-200' 
+                : 'text-gray-800 hover:text-gray-600'
+            }`}
           >
             {t.nav.thoughts}
           </button>
@@ -29,13 +52,19 @@ function Navigation({ currentPage, setCurrentPage, language, setLanguage, t }) {
           <select
             value={language}
             onChange={(e) => setLanguage(e.target.value)}
-            className="text-sm bg-transparent border border-gray-300 rounded px-3 py-1 cursor-pointer hover:border-gray-400 transition-colors appearance-none pr-8"
+            className={`text-sm bg-transparent rounded px-3 py-1 cursor-pointer transition-colors appearance-none pr-8 ${
+              isScrolled
+                ? 'border border-white/50 text-white hover:border-white'
+                : 'border border-gray-300 text-gray-800 hover:border-gray-400'
+            }`}
           >
-            <option value="en">English</option>
-            <option value="da">Danish</option>
-            <option value="hu">Hungarian</option>
+            <option value="en" className="text-gray-800">English</option>
+            <option value="da" className="text-gray-800">Danish</option>
+            <option value="hu" className="text-gray-800">Hungarian</option>
           </select>
-          <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none text-gray-600" />
+          <ChevronDown className={`absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none transition-colors ${
+            isScrolled ? 'text-white' : 'text-gray-600'
+          }`} />
         </div>
       </div>
     </nav>
@@ -101,7 +130,7 @@ function HomePage({ language, t }) {
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: 'url(/public/background.png)',
+            backgroundImage: 'url(/background.png)',
             backgroundColor: '#1a1a1a'
           }}
         />
@@ -280,6 +309,17 @@ function CommunityPage({ t }) {
 export default function MeasuredInMoments() {
   const [language, setLanguage] = useState('en');
   const [currentPage, setCurrentPage] = useState('home');
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      setIsScrolled(scrollPosition > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const content = {
     en: {
@@ -330,7 +370,8 @@ export default function MeasuredInMoments() {
         setCurrentPage={setCurrentPage} 
         language={language} 
         setLanguage={setLanguage} 
-        t={t} 
+        t={t}
+        isScrolled={isScrolled}
       />
       
       {currentPage === 'home' && <HomePage language={language} t={t} />}
