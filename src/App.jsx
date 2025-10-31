@@ -286,11 +286,11 @@ export default function MeasuredInMoments() {
       nav: { why: 'Why?', resources: 'Resources', thoughts: 'What do others think?' },
       hero: {
         title: 'Measured in Moments',
-        subtitle: 'A reflection on AI, safety, and human responsibility'
+        subtitle: 'AI evolves fast, we need to act faster'
       },
       intro: {
         title: 'Introduction',
-        text: 'Artificial Intelligence Safety is about ensuring that advanced AI systems remain beneficial, aligned with human values, and under human control. As AI becomes more powerful, the decisions we make today will shape our future. This short animation explores a critical moment in AI development—when a researcher discovers something wrong with the system they built. It is a story about choice, responsibility, and the weight of knowing.'
+        text: 'Some introduction to the events'
       },
       beforeQuestion: 'What would you do if you discovered something was wrong with the AI system you built?',
       submit: 'Submit',
@@ -299,12 +299,12 @@ export default function MeasuredInMoments() {
         description: 'Watch the story unfold.'
       },
       postAnimation: {
-        title: 'Understanding AI Safety',
-        danger: 'Uncontrolled AI systems pose existential risks. As AI capabilities grow, systems could pursue goals misaligned with human welfare, operate beyond our understanding, or resist our attempts to correct them. The challenge is not just building powerful AI—it is building AI we can trust and control.',
-        what: 'AI Safety encompasses alignment (ensuring AI goals match human values), robustness (systems that work safely in all conditions), interpretability (understanding what AI systems are doing), and oversight (maintaining meaningful human control). It requires technical solutions, governance frameworks, and a culture of responsibility.',
-        essay: 'Keep the Future Human reminds us that technology should serve humanity, not replace it. As we develop increasingly powerful AI, we must preserve human agency, dignity, and values. The future is not predetermined—it is shaped by the choices we make now, in moments that matter.'
+        title: 'What is AI Safety?',
+        danger: 'Some text',
+        what: 'Some text',
+        essay: 'Some text about Keep The Future Human'
       },
-      afterQuestion: 'What would you do differently after knowing everything you know now?',
+      afterQuestion: 'What would you do differently after knowing everything the consequences and possibilities?',
       resources: {
         title: 'Learn More',
         links: [
