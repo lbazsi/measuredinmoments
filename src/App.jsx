@@ -304,7 +304,7 @@ export default function MeasuredInMoments() {
         what: 'Some text',
         essay: 'Some text about Keep The Future Human'
       },
-      afterQuestion: 'What would you do differently after knowing everything the consequences and possibilities?',
+      afterQuestion: 'What would you do differently after knowing the consequences and possibilities?',
       resources: {
         title: 'Learn More',
         links: [
