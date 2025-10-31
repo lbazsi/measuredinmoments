@@ -317,7 +317,7 @@ export default function MeasuredInMoments() {
         title: 'Community Reflections',
         empty: 'No reflections yet. Be the first to share your thoughts.'
       },
-      footer: '© 2025 Measured in Moments – A project by Balázs László. Licensed under CC BY-NC-SA 4.0.'
+      footer: '© 2025 Measured in Moments – A project for a safe future. Licensed under CC BY-NC-SA 4.0.'
     }
   };
 
