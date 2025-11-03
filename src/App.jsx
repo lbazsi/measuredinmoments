@@ -330,7 +330,7 @@ export default function MeasuredInMoments() {
       },
       intro: {
         title: 'Introduction',
-        text: 'Some introduction to the events'
+        text: 'Let us imagine a world, where we are getting alarmingly close to achieving AI. You work as an AI development researcher, trying to achieve AGI, and you encounter some unawaited warnings. '
       },
       beforeQuestion: 'What would you do if you discovered something was wrong with the AI system you built?',
       submit: 'Submit',
