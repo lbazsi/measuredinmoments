@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
+import AnimationDetailsPage from './components/AnimationDetailsPage';
 
 function Navigation({ currentPage, setCurrentPage, language, setLanguage, t, isScrolled }) {
   return (
@@ -36,6 +37,16 @@ function Navigation({ currentPage, setCurrentPage, language, setLanguage, t, isS
             }`}
           >
             {t.nav.resources}
+          </button>
+          <button 
+            onClick={() => setCurrentPage('animation-details')} 
+            className={`text-sm transition-colors ${
+              isScrolled 
+                ? 'text-white hover:text-gray-200' 
+                : 'text-gray-800 hover:text-gray-600'
+            }`}
+          >
+            {t.nav.animationDetails}
           </button>
           <button 
             onClick={() => setCurrentPage('community')} 
@@ -323,7 +334,7 @@ export default function MeasuredInMoments() {
 
   const content = {
     en: {
-      nav: { why: 'Why?', resources: 'Resources', thoughts: 'What do others think?' },
+      nav: { why: 'Why?', resources: 'Resources', animationDetails: 'Animation Details', thoughts: 'What do others think?' },
       hero: {
         title: 'Measured in Moments',
         subtitle: 'AI evolves fast, we need to act faster'
@@ -357,6 +368,24 @@ export default function MeasuredInMoments() {
         title: 'Community Reflections',
         empty: 'No reflections yet. Be the first to share your thoughts.'
       },
+      animationDetails: {
+        title: 'Animation Details',
+        uploadTitle: 'Upload Materials',
+        uploadDescription: 'Upload animation materials and resources. Files will be stored in the GitHub repository.',
+        uploadButton: 'Click to select a file or drag and drop',
+        uploadNote: 'Files will be uploaded to GitHub repository',
+        uploadSuccess: 'File uploaded successfully!',
+        filesTitle: 'Available Materials',
+        noFiles: 'No files available yet. Upload your first file to get started.',
+        download: 'Download',
+        refresh: 'Refresh list',
+        instructionsTitle: 'How to Upload Files',
+        instruction1: 'Go to your GitHub repository',
+        instruction2: 'Navigate to or create the animation-materials folder',
+        instruction3: 'Click "Add file" > "Upload files"',
+        instruction4: 'Drag and drop or select your files',
+        instruction5: 'Commit the changes and refresh this page'
+      },
       footer: '© 2025 Measured in Moments – A project for a safe future. Licensed under CC BY-NC-SA 4.0.'
     }
   };
@@ -376,6 +405,7 @@ export default function MeasuredInMoments() {
       
       {currentPage === 'home' && <HomePage language={language} t={t} />}
       {currentPage === 'resources' && <ResourcesPage t={t} />}
+      {currentPage === 'animation-details' && <AnimationDetailsPage t={t} />}
       {currentPage === 'community' && <CommunityPage t={t} />}
       
       <Footer t={t} />
