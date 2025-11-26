@@ -8,20 +8,13 @@ function AnimationDetailsPage({ t }) {
 
   // GitHub repository configuration
   // These can be set via environment variables or updated directly
-  const GITHUB_OWNER = import.meta.env.VITE_GITHUB_OWNER || 'your-username'; // Replace with your GitHub username
-  const GITHUB_REPO = import.meta.env.VITE_GITHUB_REPO || 'measuredinmoments'; // Replace with your repository name
-  const GITHUB_FOLDER_PATH = import.meta.env.VITE_GITHUB_FOLDER || 'animation-materials'; // Folder in GitHub where files are stored
+  const GITHUB_OWNER = import.meta.env.VITE_GITHUB_OWNER || 'lbazsi';
+  const GITHUB_REPO = import.meta.env.VITE_GITHUB_REPO || 'measuredinmoments';
+  const GITHUB_FOLDER_PATH = import.meta.env.VITE_GITHUB_FOLDER || 'animation-materials';
 
   // Fetch files from GitHub
   const fetchFilesFromGitHub = async () => {
     setLoading(true);
-    
-    // Check if GitHub is configured
-    if (GITHUB_OWNER === 'your-username' || !GITHUB_OWNER) {
-      setLoading(false);
-      setError('Please configure your GitHub repository information. See GITHUB_SETUP.md for instructions.');
-      return;
-    }
 
     try {
       // Using GitHub API to list files in the folder
@@ -160,21 +153,6 @@ function AnimationDetailsPage({ t }) {
             </div>
           )}
         </div>
-
-        {/* Configuration Notice */}
-        {(GITHUB_OWNER === 'your-username' || !GITHUB_OWNER) && (
-          <div className="mt-8 p-6 bg-yellow-50 border border-yellow-200 rounded-lg">
-            <h4 className="text-lg font-medium text-yellow-900 mb-2">
-              Configuration Required
-            </h4>
-            <p className="text-sm text-yellow-800 mb-2">
-              Please configure your GitHub repository information to enable file downloads.
-            </p>
-            <p className="text-sm text-yellow-800">
-              See <code className="bg-yellow-100 px-1 rounded">GITHUB_SETUP.md</code> for instructions.
-            </p>
-          </div>
-        )}
       </section>
     </div>
   );
