@@ -70,7 +70,7 @@ function Navigation({ currentPage, setCurrentPage, language, setLanguage, t, isS
             }`}
           >
             <option value="en" className="text-gray-800">English</option>
-            <option value="da" className="text-gray-800">Danish</option>
+            <option value="de" className="text-gray-800">German</option>
             <option value="hu" className="text-gray-800">Hungarian</option>
           </select>
           <ChevronDown className={`absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none transition-colors ${
@@ -380,7 +380,7 @@ export default function MeasuredInMoments() {
     }
   };
 
-  const t = content[language];
+  const t = content[language] || content.en;
 
   return (
     <div className="min-h-screen bg-white text-gray-800">
