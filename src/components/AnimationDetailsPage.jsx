@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Upload, Download, File, Loader2, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { Download, File, Loader2, AlertCircle } from 'lucide-react';
 
 function AnimationDetailsPage({ t }) {
   const [files, setFiles] = useState([]);
-  const [uploading, setUploading] = useState(false);
-  const [uploadSuccess, setUploadSuccess] = useState(false);
-  const [uploadError, setUploadError] = useState('');
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [githubRepo, setGithubRepo] = useState('');
-  const [githubFolder, setGithubFolder] = useState('animation-materials');
 
   // GitHub repository configuration
   // These can be set via environment variables or updated directly
@@ -24,7 +19,7 @@ function AnimationDetailsPage({ t }) {
     // Check if GitHub is configured
     if (GITHUB_OWNER === 'your-username' || !GITHUB_OWNER) {
       setLoading(false);
-      setUploadError('Please configure your GitHub repository information. See GITHUB_SETUP.md for instructions.');
+      setError('Please configure your GitHub repository information. See GITHUB_SETUP.md for instructions.');
       return;
     }
 
@@ -52,24 +47,24 @@ function AnimationDetailsPage({ t }) {
             url: item.html_url
           }));
         setFiles(fileList);
-        setUploadError('');
+        setError('');
       } else if (response.status === 404) {
         // Folder doesn't exist yet, that's okay
         setFiles([]);
-        setUploadError('');
+        setError('');
       } else if (response.status === 403) {
         // Rate limit or access issue
-        setUploadError('GitHub API rate limit reached or repository is private. Please try again later.');
+        setError('GitHub API rate limit reached or repository is private. Please try again later.');
         setFiles([]);
       } else {
         console.error('Failed to fetch files:', response.statusText);
         setFiles([]);
-        setUploadError(`Failed to fetch files: ${response.statusText}`);
+        setError(`Failed to fetch files: ${response.statusText}`);
       }
     } catch (error) {
       console.error('Error fetching files:', error);
       setFiles([]);
-      setUploadError('Error connecting to GitHub. Please check your configuration.');
+      setError('Error connecting to GitHub. Please check your configuration.');
     } finally {
       setLoading(false);
     }
@@ -78,34 +73,6 @@ function AnimationDetailsPage({ t }) {
   useEffect(() => {
     fetchFilesFromGitHub();
   }, []);
-
-  // Handle file upload
-  const handleFileUpload = async (event) => {
-    const file = event.target.files[0];
-    if (!file) return;
-
-    setSelectedFile(file);
-    setUploadError('');
-    setUploadSuccess(false);
-
-    // For GitHub upload, we need to use the GitHub API
-    // This requires authentication, so we'll provide instructions
-    // and a helper function that can be used with a GitHub token
-    
-    // Note: Direct upload from browser requires GitHub Personal Access Token
-    // For security, this should be done through a backend service
-    // For now, we'll show instructions on how to upload manually
-    
-    alert(
-      `To upload files to GitHub:\n\n` +
-      `1. Go to your GitHub repository: https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}\n` +
-      `2. Navigate to the '${GITHUB_FOLDER_PATH}' folder (create it if it doesn't exist)\n` +
-      `3. Click "Add file" > "Upload files"\n` +
-      `4. Drag and drop or select your file: ${file.name}\n` +
-      `5. Commit the changes\n\n` +
-      `After uploading, refresh this page to see your file.`
-    );
-  };
 
   // Download file
   const handleDownload = (file) => {
@@ -128,67 +95,10 @@ function AnimationDetailsPage({ t }) {
           {t.animationDetails?.title || 'Animation Details'}
         </h2>
 
-        {/* Upload Section */}
-        <div className="bg-gray-50 rounded-2xl p-8 shadow-sm mb-12">
-          <h3 className="text-2xl font-light mb-6 text-gray-800">
-            {t.animationDetails?.uploadTitle || 'Upload Materials'}
-          </h3>
-          <p className="text-gray-600 mb-6">
-            {t.animationDetails?.uploadDescription || 
-              'Upload animation materials and resources. Files will be stored in the GitHub repository.'}
-          </p>
-          
-          <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gray-400 transition-colors">
-            <input
-              type="file"
-              id="file-upload"
-              className="hidden"
-              onChange={handleFileUpload}
-            />
-            <label
-              htmlFor="file-upload"
-              className="cursor-pointer flex flex-col items-center"
-            >
-              <Upload className="w-12 h-12 text-gray-400 mb-4" />
-              <p className="text-gray-700 mb-2">
-                {t.animationDetails?.uploadButton || 'Click to select a file or drag and drop'}
-              </p>
-              <p className="text-sm text-gray-500">
-                {t.animationDetails?.uploadNote || 'Files will be uploaded to GitHub repository'}
-              </p>
-            </label>
-          </div>
-
-          {selectedFile && (
-            <div className="mt-4 p-4 bg-white rounded-lg border border-gray-200">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <File className="w-5 h-5 text-gray-500" />
-                  <div>
-                    <p className="text-gray-800 font-medium">{selectedFile.name}</p>
-                    <p className="text-sm text-gray-500">{formatFileSize(selectedFile.size)}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {uploadSuccess && (
-            <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg flex items-center gap-2">
-              <CheckCircle2 className="w-5 h-5 text-green-600" />
-              <p className="text-green-800 text-sm">
-                {t.animationDetails?.uploadSuccess || 'File uploaded successfully!'}
-              </p>
-            </div>
-          )}
-
-          {uploadError && (
-            <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center gap-2">
-              <AlertCircle className="w-5 h-5 text-red-600" />
-              <p className="text-red-800 text-sm">{uploadError}</p>
-            </div>
-          )}
-        </div>
+        <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+          {t.animationDetails?.description || 
+            'Download animation materials and resources shared on this site.'}
+        </p>
 
         {/* Files List Section */}
         <div className="bg-gray-50 rounded-2xl p-8 shadow-sm">
@@ -205,7 +115,7 @@ function AnimationDetailsPage({ t }) {
             <div className="text-center py-12">
               <File className="w-16 h-16 text-gray-300 mx-auto mb-4" />
               <p className="text-gray-500">
-                {t.animationDetails?.noFiles || 'No files available yet. Upload your first file to get started.'}
+                {t.animationDetails?.noFiles || 'No files available yet.'}
               </p>
             </div>
           ) : (
@@ -242,6 +152,13 @@ function AnimationDetailsPage({ t }) {
           >
             {t.animationDetails?.refresh || 'Refresh list'}
           </button>
+
+          {error && (
+            <div className="mt-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center gap-2">
+              <AlertCircle className="w-5 h-5 text-red-600" />
+              <p className="text-red-800 text-sm">{error}</p>
+            </div>
+          )}
         </div>
 
         {/* Configuration Notice */}
@@ -251,42 +168,11 @@ function AnimationDetailsPage({ t }) {
               Configuration Required
             </h4>
             <p className="text-sm text-yellow-800 mb-2">
-              Please configure your GitHub repository information to enable file uploads and downloads.
+              Please configure your GitHub repository information to enable file downloads.
             </p>
             <p className="text-sm text-yellow-800">
               See <code className="bg-yellow-100 px-1 rounded">GITHUB_SETUP.md</code> for instructions.
             </p>
-          </div>
-        )}
-
-        {/* GitHub Instructions */}
-        {GITHUB_OWNER !== 'your-username' && GITHUB_OWNER && (
-          <div className="mt-8 p-6 bg-blue-50 border border-blue-200 rounded-lg">
-            <h4 className="text-lg font-medium text-blue-900 mb-2">
-              {t.animationDetails?.instructionsTitle || 'How to Upload Files'}
-            </h4>
-            <ol className="list-decimal list-inside space-y-2 text-sm text-blue-800">
-              <li>
-                {t.animationDetails?.instruction1 || 
-                  `Go to your GitHub repository: https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}`}
-              </li>
-              <li>
-                {t.animationDetails?.instruction2 || 
-                  `Navigate to or create the '${GITHUB_FOLDER_PATH}' folder`}
-              </li>
-              <li>
-                {t.animationDetails?.instruction3 || 
-                  'Click "Add file" > "Upload files"'}
-              </li>
-              <li>
-                {t.animationDetails?.instruction4 || 
-                  'Drag and drop or select your files'}
-              </li>
-              <li>
-                {t.animationDetails?.instruction5 || 
-                  'Commit the changes and refresh this page'}
-              </li>
-            </ol>
           </div>
         )}
       </section>

@@ -370,21 +370,11 @@ export default function MeasuredInMoments() {
       },
       animationDetails: {
         title: 'Animation Details',
-        uploadTitle: 'Upload Materials',
-        uploadDescription: 'Upload animation materials and resources. Files will be stored in the GitHub repository.',
-        uploadButton: 'Click to select a file or drag and drop',
-        uploadNote: 'Files will be uploaded to GitHub repository',
-        uploadSuccess: 'File uploaded successfully!',
+        description: 'Download animation materials and resources shared on this site.',
         filesTitle: 'Available Materials',
-        noFiles: 'No files available yet. Upload your first file to get started.',
+        noFiles: 'No files available yet.',
         download: 'Download',
-        refresh: 'Refresh list',
-        instructionsTitle: 'How to Upload Files',
-        instruction1: 'Go to your GitHub repository',
-        instruction2: 'Navigate to or create the animation-materials folder',
-        instruction3: 'Click "Add file" > "Upload files"',
-        instruction4: 'Drag and drop or select your files',
-        instruction5: 'Commit the changes and refresh this page'
+        refresh: 'Refresh list'
       },
       footer: '© 2025 Measured in Moments – A project for a safe future. Licensed under CC BY-NC-SA 4.0.'
     }
