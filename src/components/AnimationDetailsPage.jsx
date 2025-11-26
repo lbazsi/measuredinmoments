@@ -15,30 +15,60 @@ function AnimationDetailsPage({ t }) {
   // Fetch files from GitHub
   const fetchFilesFromGitHub = async () => {
     setLoading(true);
+    setError('');
+
+    // Log configuration for debugging
+    console.log('Fetching files with config:', {
+      GITHUB_OWNER,
+      GITHUB_REPO,
+      GITHUB_FOLDER_PATH,
+      url: `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_FOLDER_PATH}?ref=main`
+    });
 
     try {
       // Using GitHub API to list files in the folder (specify main branch)
-      const response = await fetch(
-        `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_FOLDER_PATH}?ref=main`,
-        {
-          headers: {
-            'Accept': 'application/vnd.github.v3+json',
-          }
+      const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_FOLDER_PATH}?ref=main`;
+      console.log('Fetching from:', apiUrl);
+      
+      const response = await fetch(apiUrl, {
+        headers: {
+          'Accept': 'application/vnd.github.v3+json',
         }
-      );
+      });
+      
+      console.log('Response status:', response.status, response.statusText);
 
       if (response.ok) {
         const data = await response.json();
+        console.log('GitHub API response:', data);
+        console.log('Number of items:', Array.isArray(data) ? data.length : 'Not an array');
+        
+        // Handle both array (directory) and object (single file) responses
+        const items = Array.isArray(data) ? data : [data];
+        
         // Filter out directories, .gitkeep, and get only files
-        const fileList = data
-          .filter(item => item.type === 'file' && item.name !== '.gitkeep')
-          .map(item => ({
-            name: item.name,
-            size: item.size,
-            downloadUrl: item.download_url,
-            sha: item.sha,
-            url: item.html_url
-          }));
+        const fileList = items
+          .filter(item => item && item.type === 'file' && item.name !== '.gitkeep')
+          .map(item => {
+            // For files larger than 1MB, GitHub API doesn't provide download_url directly
+            // We need to construct it or use the raw content URL
+            let downloadUrl = item.download_url;
+            if (!downloadUrl && item.git_url) {
+              // Construct download URL for large files
+              downloadUrl = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/${GITHUB_FOLDER_PATH}/${item.name}`;
+            }
+            
+            return {
+              name: item.name,
+              size: item.size,
+              downloadUrl: downloadUrl || item.html_url,
+              sha: item.sha,
+              url: item.html_url
+            };
+          });
+        
+        console.log('Filtered file list:', fileList);
+        console.log('Files count:', fileList.length);
         setFiles(fileList);
         setError('');
       } else if (response.status === 404) {
