@@ -17,9 +17,9 @@ function AnimationDetailsPage({ t }) {
     setLoading(true);
 
     try {
-      // Using GitHub API to list files in the folder
+      // Using GitHub API to list files in the folder (specify main branch)
       const response = await fetch(
-        `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_FOLDER_PATH}`,
+        `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_FOLDER_PATH}?ref=main`,
         {
           headers: {
             'Accept': 'application/vnd.github.v3+json',
@@ -29,9 +29,9 @@ function AnimationDetailsPage({ t }) {
 
       if (response.ok) {
         const data = await response.json();
-        // Filter out directories and get only files
+        // Filter out directories, .gitkeep, and get only files
         const fileList = data
-          .filter(item => item.type === 'file')
+          .filter(item => item.type === 'file' && item.name !== '.gitkeep')
           .map(item => ({
             name: item.name,
             size: item.size,
@@ -42,17 +42,20 @@ function AnimationDetailsPage({ t }) {
         setFiles(fileList);
         setError('');
       } else if (response.status === 404) {
-        // Folder doesn't exist yet, that's okay
+        // Folder doesn't exist yet or path is incorrect
+        const errorData = await response.json().catch(() => ({}));
+        console.error('GitHub API 404:', errorData);
         setFiles([]);
-        setError('');
+        setError('Folder not found. Please check that the animation-materials folder exists in the repository.');
       } else if (response.status === 403) {
         // Rate limit or access issue
         setError('GitHub API rate limit reached or repository is private. Please try again later.');
         setFiles([]);
       } else {
-        console.error('Failed to fetch files:', response.statusText);
+        const errorText = await response.text().catch(() => response.statusText);
+        console.error('Failed to fetch files:', response.status, errorText);
         setFiles([]);
-        setError(`Failed to fetch files: ${response.statusText}`);
+        setError(`Failed to fetch files: ${response.status} ${response.statusText}`);
       }
     } catch (error) {
       console.error('Error fetching files:', error);
