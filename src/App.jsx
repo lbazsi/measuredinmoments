@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
-import AnimationDetailsPage from './components/AnimationDetailsPage';
+import ProjectsPage from './components/ProjectsPage';
 
 function Navigation({ currentPage, setCurrentPage, language, setLanguage, t, isScrolled }) {
   return (
@@ -42,9 +42,9 @@ function Navigation({ currentPage, setCurrentPage, language, setLanguage, t, isS
             {t.nav.resources}
           </button>
           <button 
-            onClick={() => setCurrentPage('animation-details')} 
+            onClick={() => setCurrentPage('projects')} 
             className={`text-base font-medium px-3 py-2 rounded-md transition-all ${
-              currentPage === 'animation-details'
+              currentPage === 'projects'
                 ? isScrolled
                   ? 'text-beige-900 bg-beige-200'
                   : 'text-beige-900 bg-beige-100'
@@ -53,7 +53,7 @@ function Navigation({ currentPage, setCurrentPage, language, setLanguage, t, isS
                   : 'text-beige-800 hover:text-beige-900 hover:bg-beige-50'
             }`}
           >
-            {t.nav.animationDetails}
+            {t.nav.projects}
           </button>
           <button 
             onClick={() => setCurrentPage('community')} 
@@ -345,7 +345,7 @@ export default function MeasuredInMoments() {
 
   const content = {
     en: {
-      nav: { why: 'Home', resources: 'Resources', animationDetails: 'Animation Details', thoughts: 'Community' },
+      nav: { why: 'Home', resources: 'Resources', projects: 'Projects', thoughts: 'Community' },
       hero: {
         title: 'Measured in Moments',
         subtitle: 'AI evolves fast, we need to act faster'
@@ -379,13 +379,25 @@ export default function MeasuredInMoments() {
         title: 'Community Reflections',
         empty: 'No reflections yet. Be the first to share your thoughts.'
       },
-      animationDetails: {
-        title: 'Animation Details',
-        description: 'Download animation materials and resources shared on this site.',
-        filesTitle: 'Available Materials',
-        noFiles: 'No files available yet.',
-        download: 'Download',
-        refresh: 'Refresh list'
+      projects: {
+        title: 'Projects',
+        featuredTitle: 'Featured Project',
+        featuredName: 'Measured in Moments',
+        featuredDescription: 'An animated exploration of AI safety and the responsibilities we face in developing artificial intelligence.',
+        watchAnimation: 'Watch the animation',
+        formTitle: 'Submit Your Project',
+        formDescription: 'Share your project with the community. All submissions are welcome.',
+        formTitleLabel: 'Project Title',
+        formDescriptionLabel: 'Description',
+        formLinkLabel: 'External Link',
+        formAttachmentsLabel: 'Attachments',
+        optional: 'optional',
+        submit: 'Submit Project',
+        submitSuccess: 'Project submitted successfully!',
+        listTitle: 'Community Projects',
+        empty: 'No projects yet. Be the first to share your project!',
+        viewLink: 'View Project',
+        attachments: 'Attachments'
       },
       footer: '© 2025 Measured in Moments – A project for a safe future. Licensed under CC BY-NC-SA 4.0.'
     }
@@ -406,7 +418,7 @@ export default function MeasuredInMoments() {
       
       {currentPage === 'home' && <HomePage language={language} t={t} />}
       {currentPage === 'resources' && <ResourcesPage t={t} />}
-      {currentPage === 'animation-details' && <AnimationDetailsPage t={t} />}
+      {currentPage === 'projects' && <ProjectsPage t={t} />}
       {currentPage === 'community' && <CommunityPage t={t} />}
       
       <Footer t={t} />
