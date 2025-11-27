@@ -16,7 +16,7 @@ function Navigation({ currentPage, setCurrentPage, language, setLanguage, t, isS
           <img
             src="/logo.png"
             alt="Measured in Moments logo"
-            className="w-10 h-10 object-contain flex-shrink-0"
+            className="w-14 h-14 object-contain flex-shrink-0 -ml-2"
           />
           <button 
             onClick={() => setCurrentPage('home')} 
