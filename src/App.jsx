@@ -362,7 +362,7 @@ export default function MeasuredInMoments() {
       beforeQuestion: 'What would you do if you discovered something was wrong with the AI system you built?',
       submit: 'Submit',
       video: {
-        title: 'The Animation',
+        title: 'A possible future',
         description: 'Watch the story unfold.'
       },
       postAnimation: {
