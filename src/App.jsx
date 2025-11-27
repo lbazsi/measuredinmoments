@@ -15,7 +15,7 @@ function Navigation({ currentPage, setCurrentPage, language, setLanguage, t, isS
         <div className="flex gap-6 items-center">
           <button 
             onClick={() => setCurrentPage('home')} 
-            className={`text-base font-medium px-3 py-2 rounded-md transition-all flex items-center gap-2 ${
+            className={`text-base font-medium px-3 py-2 rounded-md transition-all flex items-center gap-3 ${
               currentPage === 'home'
                 ? isScrolled
                   ? 'text-beige-900 bg-beige-200'
@@ -28,7 +28,7 @@ function Navigation({ currentPage, setCurrentPage, language, setLanguage, t, isS
             <img 
               src="/logo.png" 
               alt="Logo" 
-              className="w-5 h-5 object-contain flex-shrink-0 rounded-full"
+              className="w-7 h-7 object-contain flex-shrink-0 ml-1"
             />
             {t.nav.why}
           </button>
