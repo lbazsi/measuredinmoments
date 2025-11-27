@@ -11,69 +11,75 @@ function Navigation({ currentPage, setCurrentPage, language, setLanguage, t, isS
           : 'bg-white/95 backdrop-blur-sm shadow-sm'
       }`}
     >
-      <div className={`max-w-6xl mx-auto pl-6 pr-6 py-4 flex justify-between items-center`}>
-        <div className="flex gap-6 items-center">
+      <div className="w-full px-6 py-4 flex justify-between items-center">
+        {/* LEFT: logo + nav links */}
+        <div className="flex items-center gap-8">
+          {/* Logo – site icon, not a button */}
           <img
             src="/logo.png"
             alt="Measured in Moments logo"
-            className="w-10 h-10 object-contain flex-shrink-0 -ml-2"
+            className="w-10 h-10 object-contain"
           />
-          <button 
-            onClick={() => setCurrentPage('home')} 
-            className={`text-base font-medium px-3 py-2 rounded-md transition-all ${
-              currentPage === 'home'
-                ? isScrolled
-                  ? 'text-beige-900 bg-beige-200'
-                  : 'text-beige-900 bg-beige-100'
-                : isScrolled 
-                  ? 'text-beige-800 hover:text-beige-900 hover:bg-beige-100' 
-                  : 'text-beige-800 hover:text-beige-900 hover:bg-beige-50'
-            }`}
-          >
-            {t.nav.why}
-          </button>
-          <button 
-            onClick={() => setCurrentPage('resources')} 
-            className={`text-base font-medium px-3 py-2 rounded-md transition-all ${
-              currentPage === 'resources'
-                ? isScrolled
-                  ? 'text-beige-900 bg-beige-200'
-                  : 'text-beige-900 bg-beige-100'
-                : isScrolled 
-                  ? 'text-beige-800 hover:text-beige-900 hover:bg-beige-100' 
-                  : 'text-beige-800 hover:text-beige-900 hover:bg-beige-50'
-            }`}
-          >
-            {t.nav.resources}
-          </button>
-          <button 
-            onClick={() => setCurrentPage('projects')} 
-            className={`text-base font-medium px-3 py-2 rounded-md transition-all ${
-              currentPage === 'projects'
-                ? isScrolled
-                  ? 'text-beige-900 bg-beige-200'
-                  : 'text-beige-900 bg-beige-100'
-                : isScrolled 
-                  ? 'text-beige-800 hover:text-beige-900 hover:bg-beige-100' 
-                  : 'text-beige-800 hover:text-beige-900 hover:bg-beige-50'
-            }`}
-          >
-            {t.nav.projects}
-          </button>
-          <button 
-            onClick={() => setCurrentPage('community')} 
-            className={`text-base font-medium px-3 py-2 rounded-md transition-all ${
-              currentPage === 'community'
-                ? isScrolled
-                  ? 'text-beige-900 bg-beige-200'
-                  : 'text-beige-900 bg-beige-100'
-                : isScrolled 
-                  ? 'text-beige-800 hover:text-beige-900 hover:bg-beige-100' 
-                  : 'text-beige-800 hover:text-beige-900 hover:bg-beige-50'
-            }`}
-          >
-            {t.nav.thoughts}
-          </button>
+
+          {/* Nav links group */}
+          <div className="flex gap-6">
+            <button 
+              onClick={() => setCurrentPage('home')} 
+              className={`text-base font-medium px-3 py-2 rounded-md transition-all ${
+                currentPage === 'home'
+                  ? isScrolled
+                    ? 'text-beige-900 bg-beige-200'
+                    : 'text-beige-900 bg-beige-100'
+                  : isScrolled 
+                    ? 'text-beige-800 hover:text-beige-900 hover:bg-beige-100' 
+                    : 'text-beige-800 hover:text-beige-900 hover:bg-beige-50'
+              }`}
+            >
+              {t.nav.why}
+            </button>
+            <button 
+              onClick={() => setCurrentPage('resources')} 
+              className={`text-base font-medium px-3 py-2 rounded-md transition-all ${
+                currentPage === 'resources'
+                  ? isScrolled
+                    ? 'text-beige-900 bg-beige-200'
+                    : 'text-beige-900 bg-beige-100'
+                  : isScrolled 
+                    ? 'text-beige-800 hover:text-beige-900 hover:bg-beige-100' 
+                    : 'text-beige-800 hover:text-beige-900 hover:bg-beige-50'
+              }`}
+            >
+              {t.nav.resources}
+            </button>
+            <button 
+              onClick={() => setCurrentPage('projects')} 
+              className={`text-base font-medium px-3 py-2 rounded-md transition-all ${
+                currentPage === 'projects'
+                  ? isScrolled
+                    ? 'text-beige-900 bg-beige-200'
+                    : 'text-beige-900 bg-beige-100'
+                  : isScrolled 
+                    ? 'text-beige-800 hover:text-beige-900 hover:bg-beige-100' 
+                    : 'text-beige-800 hover:text-beige-900 hover:bg-beige-50'
+              }`}
+            >
+              {t.nav.projects}
+            </button>
+            <button 
+              onClick={() => setCurrentPage('community')} 
+              className={`text-base font-medium px-3 py-2 rounded-md transition-all ${
+                currentPage === 'community'
+                  ? isScrolled
+                    ? 'text-beige-900 bg-beige-200'
+                    : 'text-beige-900 bg-beige-100'
+                  : isScrolled 
+                    ? 'text-beige-800 hover:text-beige-900 hover:bg-beige-100' 
+                    : 'text-beige-800 hover:text-beige-900 hover:bg-beige-50'
+              }`}
+            >
+              {t.nav.thoughts}
+            </button>
+          </div>
         </div>
         <div className="relative">
           <select
