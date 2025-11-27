@@ -159,9 +159,16 @@ function HomePage({ language, t }) {
         />
         <div className="absolute inset-0 bg-black/50" />
         <div className="relative z-10 text-center text-white px-6">
-          <h1 className="text-5xl md:text-7xl font-light mb-6 tracking-wide">
-            {t.hero.title}
-          </h1>
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <img 
+              src="/logo.png" 
+              alt="Logo" 
+              className="w-12 h-12 md:w-16 md:h-16 object-contain"
+            />
+            <h1 className="text-5xl md:text-7xl font-light tracking-wide">
+              {t.hero.title}
+            </h1>
+          </div>
           <p className="text-xl md:text-2xl font-light opacity-90">
             {t.hero.subtitle}
           </p>
