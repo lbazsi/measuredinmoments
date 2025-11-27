@@ -120,6 +120,7 @@ function HomePage({ language, t }) {
   const [afterReflection, setAfterReflection] = useState('');
   const [showBeforeSuccess, setShowBeforeSuccess] = useState(false);
   const [showAfterSuccess, setShowAfterSuccess] = useState(false);
+  const [showMoreIntro, setShowMoreIntro] = useState(false);
 
   const handleBeforeSubmit = () => {
     if (beforeReflection.trim()) {
@@ -170,9 +171,20 @@ function HomePage({ language, t }) {
       {/* Introduction Section */}
       <section className="max-w-3xl mx-auto px-6 py-24 text-center">
         <h2 className="text-3xl font-light mb-8 text-beige-900">{t.intro.title}</h2>
-        <p className="text-lg leading-relaxed text-beige-700">
-          {t.intro.text}
-        </p>
+        <div className="text-lg leading-relaxed text-beige-700 space-y-4 text-left">
+          {t.intro.text.split('\n\n').map((paragraph, idx) => (
+            <p key={idx}>{paragraph}</p>
+          ))}
+          {showMoreIntro && (
+            <p>{t.intro.moreText}</p>
+          )}
+        </div>
+        <button
+          onClick={() => setShowMoreIntro(!showMoreIntro)}
+          className="mt-6 text-beige-700 hover:text-beige-900 underline text-base transition-colors"
+        >
+          {showMoreIntro ? t.intro.readLess : t.intro.readMore}
+        </button>
       </section>
 
       {/* Before Reflection */}
@@ -352,7 +364,10 @@ export default function MeasuredInMoments() {
       },
       intro: {
         title: 'Introduction',
-        text: 'Let us imagine a world where we are getting alarmingly close to achieving AI, you work as an AI development researcher, trying to achieve AGI, and you encounter some unawaited warnings. In our hectic world, everything changes extremely fast, new methods are published every week and model capabilities improve by the minute. So, you don\'t really pay much attention to these issues at first, but they appear again, what would you do in this situation?'
+        text: 'Let us imagine a world where we are getting alarmingly close to achieving AGI (Artificial General Intelligence). You work as an AI development researcher, pushing the frontiers of AI day by day. This field moves with unprecedented speed, breakthroughs happen every day, new methodologies, new datasets, new models and discoveries are released at a rate beyond what we can keep in mind.\n\nSo, when encountering some small warning messages in your system logs, you barely notice them. A strange output, an unexplained action, a few seemingly wrong parameters… nothing unusual. So, you treat them as such, just a few bumps on the way to AGI, but they return, they repeat, and go beyond your capabilities way before you could act. AGI might have already been created.\n\nWhat would you do if this happened to you?',
+        moreText: 'This world isn\'t any different from where we currently are, humanity has always been developing tools to propel technological development. But AI is different, it is the first ever technology, which could exceed human intelligence, and change our life fundamentally. The direction of this change depends on what WE do today. There are an incredible, and increasing number of dangers that AI poses, but what are those exactly, does it extend farther than chatbots trying to deceive us, and why can\'t we solve all issues?',
+        readMore: 'Read more',
+        readLess: 'Read less'
       },
       beforeQuestion: 'What would you do if you discovered something was wrong with the AI system you built?',
       submit: 'Submit',
