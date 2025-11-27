@@ -11,12 +11,12 @@ function Navigation({ currentPage, setCurrentPage, language, setLanguage, t, isS
           : 'bg-white/95 backdrop-blur-sm shadow-sm'
       }`}
     >
-      <div className={`max-w-6xl mx-auto px-6 py-4 flex justify-between items-center`}>
+      <div className={`max-w-6xl mx-auto pl-6 pr-6 py-4 flex justify-between items-center`}>
         <div className="flex gap-6 items-center">
           <img
             src="/logo.png"
             alt="Measured in Moments logo"
-            className="w-7 h-7 object-contain flex-shrink-0"
+            className="w-10 h-10 object-contain flex-shrink-0"
           />
           <button 
             onClick={() => setCurrentPage('home')} 
