@@ -79,17 +79,17 @@ function Navigation({ currentPage, setCurrentPage, language, setLanguage, t, isS
           <select
             value={language}
             onChange={(e) => setLanguage(e.target.value)}
-            className={`text-sm bg-transparent rounded px-3 py-1 cursor-pointer transition-colors appearance-none pr-8 ${
+            className={`text-base font-medium rounded-md px-4 py-2 pr-10 cursor-pointer transition-all appearance-none focus:outline-none focus:ring-2 focus:ring-offset-2 ${
               isScrolled
-                ? 'border border-white/50 text-white hover:border-white'
-                : 'border border-beige-300 text-beige-900 hover:border-beige-400'
+                ? 'bg-white/10 backdrop-blur-sm border border-white/30 text-white hover:bg-white/20 hover:border-white/50 focus:ring-white/50'
+                : 'bg-beige-50 border border-beige-300 text-beige-900 hover:bg-beige-100 hover:border-beige-400 focus:ring-beige-400'
             }`}
           >
-            <option value="en" className="text-gray-800">English</option>
-            <option value="de" className="text-gray-800">German</option>
-            <option value="hu" className="text-gray-800">Hungarian</option>
+            <option value="en" className="text-beige-900 bg-white">English</option>
+            <option value="de" className="text-beige-900 bg-white">German</option>
+            <option value="hu" className="text-beige-900 bg-white">Hungarian</option>
           </select>
-          <ChevronDown className={`absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none transition-colors ${
+          <ChevronDown className={`absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none transition-colors ${
             isScrolled ? 'text-white' : 'text-beige-700'
           }`} />
         </div>
