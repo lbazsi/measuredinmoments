@@ -345,7 +345,7 @@ export default function MeasuredInMoments() {
 
   const content = {
     en: {
-      nav: { why: 'Home', resources: 'Resources', projects: 'Projects', thoughts: 'Community' },
+      nav: { why: 'Home', resources: 'Get involved', projects: 'Projects', thoughts: 'Community' },
       hero: {
         title: 'Measured in Moments',
         subtitle: 'AI evolves fast, we need to act faster'
@@ -368,7 +368,7 @@ export default function MeasuredInMoments() {
       },
       afterQuestion: 'What would you do differently after knowing the consequences and possibilities?',
       resources: {
-        title: 'Learn More',
+        title: 'Get involved',
         links: [
           { text: 'AI Safety Fundamentals', url: 'https://aisafetyfundamentals.com/' },
           { text: 'Center for AI Safety', url: 'https://safe.ai/' },
