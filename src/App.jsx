@@ -12,10 +12,10 @@ function Navigation({ currentPage, setCurrentPage, language, setLanguage, t, isS
       }`}
     >
       <div className={`max-w-6xl mx-auto px-6 py-4 flex justify-between items-center`}>
-        <div className="flex gap-6">
+        <div className="flex gap-6 items-center">
           <button 
             onClick={() => setCurrentPage('home')} 
-            className={`text-base font-medium px-3 py-2 rounded-md transition-all ${
+            className={`text-base font-medium px-3 py-2 rounded-md transition-all flex items-center gap-2 ${
               currentPage === 'home'
                 ? isScrolled
                   ? 'text-beige-900 bg-beige-200'
@@ -25,6 +25,11 @@ function Navigation({ currentPage, setCurrentPage, language, setLanguage, t, isS
                   : 'text-beige-800 hover:text-beige-900 hover:bg-beige-50'
             }`}
           >
+            <img 
+              src="/logo.png" 
+              alt="Logo" 
+              className="w-5 h-5 object-contain"
+            />
             {t.nav.why}
           </button>
           <button 
@@ -159,16 +164,9 @@ function HomePage({ language, t }) {
         />
         <div className="absolute inset-0 bg-black/50" />
         <div className="relative z-10 text-center text-white px-6">
-          <div className="flex items-center justify-center gap-4 mb-6">
-            <img 
-              src="/logo.png" 
-              alt="Logo" 
-              className="w-12 h-12 md:w-16 md:h-16 object-contain"
-            />
-            <h1 className="text-5xl md:text-7xl font-light tracking-wide">
-              {t.hero.title}
-            </h1>
-          </div>
+          <h1 className="text-5xl md:text-7xl font-light mb-6 tracking-wide">
+            {t.hero.title}
+          </h1>
           <p className="text-xl md:text-2xl font-light opacity-90">
             {t.hero.subtitle}
           </p>
