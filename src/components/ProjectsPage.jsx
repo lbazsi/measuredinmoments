@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { File, Play, ExternalLink, Upload, CheckCircle2 } from 'lucide-react';
+import { File, ExternalLink, CheckCircle2, Download, Loader2 } from 'lucide-react';
 
 function ProjectsPage({ t }) {
   const [projects, setProjects] = useState([]);
+  const [featuredFiles, setFeaturedFiles] = useState([]);
+  const [loadingFiles, setLoadingFiles] = useState(true);
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -12,12 +14,61 @@ function ProjectsPage({ t }) {
   const [showSuccess, setShowSuccess] = useState(false);
   const [fileInputKey, setFileInputKey] = useState(0);
 
+  // GitHub repository configuration
+  const GITHUB_OWNER = import.meta.env.VITE_GITHUB_OWNER || 'lbazsi';
+  const GITHUB_REPO = import.meta.env.VITE_GITHUB_REPO || 'measuredinmoments';
+  const GITHUB_FOLDER_PATH = import.meta.env.VITE_GITHUB_FOLDER || 'animation-materials';
+
+  // Fetch files from GitHub for featured project
+  const fetchFeaturedFiles = async () => {
+    setLoadingFiles(true);
+    try {
+      const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_FOLDER_PATH}?ref=main`;
+      const response = await fetch(apiUrl, {
+        headers: {
+          'Accept': 'application/vnd.github.v3+json',
+        }
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const items = Array.isArray(data) ? data : [data];
+        
+        const fileList = items
+          .filter(item => item && item.type === 'file' && item.name !== '.gitkeep')
+          .map(item => {
+            let downloadUrl = item.download_url;
+            if (!downloadUrl && item.git_url) {
+              downloadUrl = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/${GITHUB_FOLDER_PATH}/${item.name}`;
+            }
+            
+            return {
+              name: item.name,
+              size: item.size,
+              downloadUrl: downloadUrl || item.html_url,
+              type: item.name.split('.').pop() || 'file'
+            };
+          });
+        
+        setFeaturedFiles(fileList);
+      } else {
+        setFeaturedFiles([]);
+      }
+    } catch (error) {
+      console.error('Error fetching featured files:', error);
+      setFeaturedFiles([]);
+    } finally {
+      setLoadingFiles(false);
+    }
+  };
+
   // Load projects from localStorage on mount
   useEffect(() => {
     const stored = localStorage.getItem('communityProjects');
     if (stored) {
       setProjects(JSON.parse(stored));
     }
+    fetchFeaturedFiles();
   }, []);
 
   // Handle file selection
@@ -105,15 +156,40 @@ function ProjectsPage({ t }) {
           <p className="text-beige-700 mb-6 leading-relaxed">
             {t.projects?.featuredDescription || 'An animated exploration of AI safety and the responsibilities we face in developing artificial intelligence.'}
           </p>
-          <a
-            href="/measuredinmoments.mp4"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-beige-700 text-white rounded-lg hover:bg-beige-800 transition-colors"
-          >
-            <Play className="w-5 h-5" />
-            {t.projects?.watchAnimation || 'Watch the animation'}
-          </a>
+          
+          {/* Attachments */}
+          {loadingFiles ? (
+            <div className="flex items-center gap-2 text-beige-600">
+              <Loader2 className="w-4 h-4 animate-spin" />
+              <span className="text-sm">Loading materials...</span>
+            </div>
+          ) : featuredFiles.length > 0 ? (
+            <div>
+              <p className="text-sm font-medium text-beige-800 mb-3">
+                {t.projects?.attachments || 'Attachments'}:
+              </p>
+              <div className="space-y-2">
+                {featuredFiles.map((file, idx) => (
+                  <div key={idx} className="flex items-center justify-between bg-white rounded-lg p-3 border border-beige-200">
+                    <div className="flex items-center gap-2 flex-1 min-w-0">
+                      <File className="w-4 h-4 text-beige-600 flex-shrink-0" />
+                      <span className="text-sm text-beige-800 truncate">{file.name}</span>
+                      <span className="text-xs text-beige-600 flex-shrink-0">({formatFileSize(file.size)})</span>
+                    </div>
+                    <a
+                      href={file.downloadUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="ml-3 px-3 py-1 bg-beige-700 text-white rounded text-sm hover:bg-beige-800 transition-colors flex items-center gap-1 flex-shrink-0"
+                    >
+                      <Download className="w-3 h-3" />
+                      {t.projects?.download || 'Download'}
+                    </a>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : null}
         </div>
 
         {/* Community Projects Section */}
