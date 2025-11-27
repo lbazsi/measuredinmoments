@@ -117,30 +117,30 @@ function AnimationDetailsPage({ t }) {
   return (
     <div className="pt-24">
       <section className="max-w-4xl mx-auto px-6 py-24">
-        <h2 className="text-3xl font-light mb-12 text-center text-gray-800">
+        <h2 className="text-3xl font-light mb-12 text-center text-beige-900">
           {t.animationDetails?.title || 'Animation Details'}
         </h2>
 
-        <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+        <p className="text-center text-beige-700 mb-12 max-w-2xl mx-auto">
           {t.animationDetails?.description || 
             'Download animation materials and resources shared on this site.'}
         </p>
 
         {/* Files List Section */}
-        <div className="bg-gray-50 rounded-2xl p-8 shadow-sm">
-          <h3 className="text-2xl font-light mb-6 text-gray-800">
+        <div className="bg-beige-50 rounded-2xl p-8 shadow-sm">
+          <h3 className="text-2xl font-light mb-6 text-beige-900">
             {t.animationDetails?.filesTitle || 'Available Materials'}
           </h3>
 
           {loading ? (
             <div className="flex items-center justify-center py-12">
-              <Loader2 className="w-8 h-8 text-gray-400 animate-spin" />
-              <p className="ml-3 text-gray-600">Loading files...</p>
+              <Loader2 className="w-8 h-8 text-beige-500 animate-spin" />
+              <p className="ml-3 text-beige-700">Loading files...</p>
             </div>
           ) : files.length === 0 ? (
             <div className="text-center py-12">
-              <File className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-              <p className="text-gray-500">
+              <File className="w-16 h-16 text-beige-300 mx-auto mb-4" />
+              <p className="text-beige-600">
                 {t.animationDetails?.noFiles || 'No files available yet.'}
               </p>
             </div>
@@ -149,19 +149,19 @@ function AnimationDetailsPage({ t }) {
               {files.map((file, idx) => (
                 <div
                   key={idx}
-                  className="bg-white rounded-lg p-4 border border-gray-200 hover:shadow-md transition-shadow"
+                  className="bg-white rounded-lg p-4 border border-beige-200 hover:shadow-md transition-shadow"
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3 flex-1">
-                      <File className="w-5 h-5 text-gray-500 flex-shrink-0" />
+                      <File className="w-5 h-5 text-beige-600 flex-shrink-0" />
                       <div className="flex-1 min-w-0">
-                        <p className="text-gray-800 font-medium truncate">{file.name}</p>
-                        <p className="text-sm text-gray-500">{formatFileSize(file.size)}</p>
+                        <p className="text-beige-900 font-medium truncate">{file.name}</p>
+                        <p className="text-sm text-beige-600">{formatFileSize(file.size)}</p>
                       </div>
                     </div>
                     <button
                       onClick={() => handleDownload(file)}
-                      className="ml-4 px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors flex items-center gap-2 flex-shrink-0"
+                      className="ml-4 px-4 py-2 bg-beige-700 text-white rounded-lg hover:bg-beige-800 transition-colors flex items-center gap-2 flex-shrink-0"
                     >
                       <Download className="w-4 h-4" />
                       {t.animationDetails?.download || 'Download'}
@@ -174,7 +174,7 @@ function AnimationDetailsPage({ t }) {
 
           <button
             onClick={fetchFilesFromGitHub}
-            className="mt-6 text-sm text-gray-600 hover:text-gray-800 underline"
+            className="mt-6 text-sm text-beige-700 hover:text-beige-900 underline"
           >
             {t.animationDetails?.refresh || 'Refresh list'}
           </button>

@@ -23,7 +23,7 @@ function Navigation({ currentPage, setCurrentPage, language, setLanguage, t, isS
             className={`text-sm transition-colors ${
               isScrolled 
                 ? 'text-white hover:text-gray-200' 
-                : 'text-gray-800 hover:text-gray-600'
+                : 'text-beige-900 hover:text-beige-700'
             }`}
           >
             {t.nav.why}
@@ -33,7 +33,7 @@ function Navigation({ currentPage, setCurrentPage, language, setLanguage, t, isS
             className={`text-sm transition-colors ${
               isScrolled 
                 ? 'text-white hover:text-gray-200' 
-                : 'text-gray-800 hover:text-gray-600'
+                : 'text-beige-900 hover:text-beige-700'
             }`}
           >
             {t.nav.resources}
@@ -43,7 +43,7 @@ function Navigation({ currentPage, setCurrentPage, language, setLanguage, t, isS
             className={`text-sm transition-colors ${
               isScrolled 
                 ? 'text-white hover:text-gray-200' 
-                : 'text-gray-800 hover:text-gray-600'
+                : 'text-beige-900 hover:text-beige-700'
             }`}
           >
             {t.nav.animationDetails}
@@ -53,7 +53,7 @@ function Navigation({ currentPage, setCurrentPage, language, setLanguage, t, isS
             className={`text-sm transition-colors ${
               isScrolled 
                 ? 'text-white hover:text-gray-200' 
-                : 'text-gray-800 hover:text-gray-600'
+                : 'text-beige-900 hover:text-beige-700'
             }`}
           >
             {t.nav.thoughts}
@@ -66,7 +66,7 @@ function Navigation({ currentPage, setCurrentPage, language, setLanguage, t, isS
             className={`text-sm bg-transparent rounded px-3 py-1 cursor-pointer transition-colors appearance-none pr-8 ${
               isScrolled
                 ? 'border border-white/50 text-white hover:border-white'
-                : 'border border-gray-300 text-gray-800 hover:border-gray-400'
+                : 'border border-beige-300 text-beige-900 hover:border-beige-400'
             }`}
           >
             <option value="en" className="text-gray-800">English</option>
@@ -74,7 +74,7 @@ function Navigation({ currentPage, setCurrentPage, language, setLanguage, t, isS
             <option value="hu" className="text-gray-800">Hungarian</option>
           </select>
           <ChevronDown className={`absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none transition-colors ${
-            isScrolled ? 'text-white' : 'text-gray-600'
+            isScrolled ? 'text-white' : 'text-beige-700'
           }`} />
         </div>
       </div>
@@ -84,16 +84,16 @@ function Navigation({ currentPage, setCurrentPage, language, setLanguage, t, isS
 
 function Footer({ t }) {
   return (
-    <footer className="bg-gray-50 py-12 mt-24">
+    <footer className="bg-beige-50 py-12 mt-24">
       <div className="max-w-6xl mx-auto px-6 text-center">
-        <p className="text-sm text-gray-600 mb-4">{t.footer}</p>
-        <p className="text-xs text-gray-500">
+        <p className="text-sm text-beige-700 mb-4">{t.footer}</p>
+        <p className="text-xs text-beige-600">
           This work is licensed under a{' '}
           <a
             href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
             target="_blank"
             rel="noopener noreferrer"
-            className="underline hover:text-gray-700"
+            className="underline hover:text-beige-800"
           >
             Creative Commons Attribution–NonCommercial–ShareAlike 4.0 International License
           </a>
@@ -158,27 +158,27 @@ function HomePage({ language, t }) {
 
       {/* Introduction Section */}
       <section className="max-w-3xl mx-auto px-6 py-24 text-center">
-        <h2 className="text-3xl font-light mb-8 text-gray-800">{t.intro.title}</h2>
-        <p className="text-lg leading-relaxed text-gray-700">
+        <h2 className="text-3xl font-light mb-8 text-beige-900">{t.intro.title}</h2>
+        <p className="text-lg leading-relaxed text-beige-700">
           {t.intro.text}
         </p>
       </section>
 
       {/* Before Reflection */}
       <section className="max-w-2xl mx-auto px-6 py-16">
-        <div className="bg-gray-50 rounded-2xl p-12 shadow-sm">
-          <h3 className="text-2xl font-light mb-8 text-center text-gray-800">
+        <div className="bg-beige-50 rounded-2xl p-12 shadow-sm">
+          <h3 className="text-2xl font-light mb-8 text-center text-beige-900">
             {t.beforeQuestion}
           </h3>
           <textarea
             value={beforeReflection}
             onChange={(e) => setBeforeReflection(e.target.value)}
-            className="w-full h-32 p-4 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all"
+            className="w-full h-32 p-4 border border-beige-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-beige-400 transition-all bg-white"
             placeholder="Share your thoughts..."
           />
           <button
             onClick={handleBeforeSubmit}
-            className="mt-6 w-full bg-gray-800 text-white py-3 rounded-lg hover:bg-gray-700 transition-colors"
+            className="mt-6 w-full bg-beige-700 text-white py-3 rounded-lg hover:bg-beige-800 transition-colors"
           >
             {t.submit}
           </button>
@@ -192,7 +192,7 @@ function HomePage({ language, t }) {
 
       {/* Video Section */}
       <section className="max-w-5xl mx-auto px-6 py-24">
-        <h2 className="text-3xl font-light mb-12 text-center text-gray-800">
+        <h2 className="text-3xl font-light mb-12 text-center text-beige-900">
           {t.video.title}
         </h2>
         <div className="relative rounded-2xl overflow-hidden shadow-2xl">
@@ -210,16 +210,16 @@ function HomePage({ language, t }) {
       {/* Post-Animation Content */}
       <section className="max-w-3xl mx-auto px-6 py-24 text-center space-y-12">
         <div>
-          <h2 className="text-3xl font-light mb-8 text-gray-800">
+          <h2 className="text-3xl font-light mb-8 text-beige-900">
             {t.postAnimation.title}
           </h2>
-          <p className="text-lg leading-relaxed text-gray-700 mb-8">
+          <p className="text-lg leading-relaxed text-beige-700 mb-8">
             {t.postAnimation.danger}
           </p>
-          <p className="text-lg leading-relaxed text-gray-700 mb-8">
+          <p className="text-lg leading-relaxed text-beige-700 mb-8">
             {t.postAnimation.what}
           </p>
-          <p className="text-lg leading-relaxed text-gray-700">
+          <p className="text-lg leading-relaxed text-beige-700">
             {t.postAnimation.essay}
           </p>
         </div>
@@ -227,19 +227,19 @@ function HomePage({ language, t }) {
 
       {/* After Reflection */}
       <section className="max-w-2xl mx-auto px-6 py-16">
-        <div className="bg-gray-50 rounded-2xl p-12 shadow-sm">
-          <h3 className="text-2xl font-light mb-8 text-center text-gray-800">
+        <div className="bg-beige-50 rounded-2xl p-12 shadow-sm">
+          <h3 className="text-2xl font-light mb-8 text-center text-beige-900">
             {t.afterQuestion}
           </h3>
           <textarea
             value={afterReflection}
             onChange={(e) => setAfterReflection(e.target.value)}
-            className="w-full h-32 p-4 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all"
+            className="w-full h-32 p-4 border border-beige-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-beige-400 transition-all bg-white"
             placeholder="Share your updated thoughts..."
           />
           <button
             onClick={handleAfterSubmit}
-            className="mt-6 w-full bg-gray-800 text-white py-3 rounded-lg hover:bg-gray-700 transition-colors"
+            className="mt-6 w-full bg-beige-700 text-white py-3 rounded-lg hover:bg-beige-800 transition-colors"
           >
             {t.submit}
           </button>
@@ -258,7 +258,7 @@ function ResourcesPage({ t }) {
   return (
     <div className="pt-24">
       <section className="max-w-3xl mx-auto px-6 py-24 text-center">
-        <h2 className="text-3xl font-light mb-12 text-gray-800">
+        <h2 className="text-3xl font-light mb-12 text-beige-900">
           {t.resources.title}
         </h2>
         <div className="space-y-4">
@@ -268,7 +268,7 @@ function ResourcesPage({ t }) {
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="block text-lg text-gray-700 hover:text-gray-900 underline decoration-1 underline-offset-4 transition-colors"
+              className="block text-lg text-beige-700 hover:text-beige-900 underline decoration-1 underline-offset-4 transition-colors"
             >
               {link.text}
             </a>
@@ -292,20 +292,20 @@ function CommunityPage({ t }) {
   return (
     <div className="pt-24">
       <section className="max-w-4xl mx-auto px-6 py-24">
-        <h2 className="text-3xl font-light mb-12 text-center text-gray-800">
+        <h2 className="text-3xl font-light mb-12 text-center text-beige-900">
           {t.reflections.title}
         </h2>
         {publicReflections.length === 0 ? (
-          <p className="text-center text-gray-500">{t.reflections.empty}</p>
+          <p className="text-center text-beige-600">{t.reflections.empty}</p>
         ) : (
           <div className="space-y-6">
             {publicReflections.map((reflection, idx) => (
               <div
                 key={idx}
-                className="bg-gray-50 rounded-xl p-8 shadow-sm"
+                className="bg-beige-50 rounded-xl p-8 shadow-sm"
               >
-                <p className="text-gray-700 leading-relaxed">{reflection.text}</p>
-                <p className="text-sm text-gray-400 mt-4">
+                <p className="text-beige-800 leading-relaxed">{reflection.text}</p>
+                <p className="text-sm text-beige-600 mt-4">
                   {new Date(reflection.timestamp).toLocaleDateString()}
                 </p>
               </div>
