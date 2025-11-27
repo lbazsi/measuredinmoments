@@ -352,7 +352,7 @@ export default function MeasuredInMoments() {
       },
       intro: {
         title: 'Introduction',
-        text: 'Let us imagine a world, where we are getting alarmingly close to achieving AI. You work as an AI development researcher, trying to achieve AGI, and you encounter some unawaited warnings. '
+        text: 'Let us imagine a world where we are getting alarmingly close to achieving AI, you work as an AI development researcher, trying to achieve AGI, and you encounter some unawaited warnings. In our hectic world, everything changes extremely fast, new methods are published every week and model capabilities improve by the minute. So, you don\'t really pay much attention to these issues at first, but they appear again, what would you do in this situation?'
       },
       beforeQuestion: 'What would you do if you discovered something was wrong with the AI system you built?',
       submit: 'Submit',
