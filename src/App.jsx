@@ -28,7 +28,7 @@ function Navigation({ currentPage, setCurrentPage, language, setLanguage, t, isS
             <img 
               src="/logo.png" 
               alt="Logo" 
-              className="w-5 h-5 object-contain"
+              className="w-5 h-5 object-contain flex-shrink-0 rounded-full"
             />
             {t.nav.why}
           </button>
