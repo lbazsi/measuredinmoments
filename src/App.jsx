@@ -334,7 +334,7 @@ export default function MeasuredInMoments() {
 
   const content = {
     en: {
-      nav: { why: 'Why?', resources: 'Resources', animationDetails: 'Animation Details', thoughts: 'What do others think?' },
+      nav: { why: 'Home', resources: 'Resources', animationDetails: 'Animation Details', thoughts: 'Community' },
       hero: {
         title: 'Measured in Moments',
         subtitle: 'AI evolves fast, we need to act faster'
