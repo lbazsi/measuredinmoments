@@ -7,26 +7,21 @@ function Navigation({ currentPage, setCurrentPage, language, setLanguage, t, isS
     <nav 
       className={`fixed top-0 w-full transition-all duration-300 z-50 ${
         isScrolled 
-          ? 'bg-cover bg-center shadow-lg' 
+          ? 'bg-beige-50 shadow-lg' 
           : 'bg-white/95 backdrop-blur-sm shadow-sm'
       }`}
-      style={isScrolled ? {
-        backgroundImage: 'url(/background.png)',
-      } : {}}
     >
-      <div className={`max-w-6xl mx-auto px-6 py-4 flex justify-between items-center ${
-        isScrolled ? 'backdrop-blur-sm' : ''
-      }`}>
+      <div className={`max-w-6xl mx-auto px-6 py-4 flex justify-between items-center`}>
         <div className="flex gap-6">
           <button 
             onClick={() => setCurrentPage('home')} 
             className={`text-base font-medium px-3 py-2 rounded-md transition-all ${
               currentPage === 'home'
                 ? isScrolled
-                  ? 'text-white bg-white/20 backdrop-blur-sm'
+                  ? 'text-beige-900 bg-beige-200'
                   : 'text-beige-900 bg-beige-100'
                 : isScrolled 
-                  ? 'text-white/90 hover:text-white hover:bg-white/10' 
+                  ? 'text-beige-800 hover:text-beige-900 hover:bg-beige-100' 
                   : 'text-beige-800 hover:text-beige-900 hover:bg-beige-50'
             }`}
           >
@@ -37,10 +32,10 @@ function Navigation({ currentPage, setCurrentPage, language, setLanguage, t, isS
             className={`text-base font-medium px-3 py-2 rounded-md transition-all ${
               currentPage === 'resources'
                 ? isScrolled
-                  ? 'text-white bg-white/20 backdrop-blur-sm'
+                  ? 'text-beige-900 bg-beige-200'
                   : 'text-beige-900 bg-beige-100'
                 : isScrolled 
-                  ? 'text-white/90 hover:text-white hover:bg-white/10' 
+                  ? 'text-beige-800 hover:text-beige-900 hover:bg-beige-100' 
                   : 'text-beige-800 hover:text-beige-900 hover:bg-beige-50'
             }`}
           >
@@ -51,10 +46,10 @@ function Navigation({ currentPage, setCurrentPage, language, setLanguage, t, isS
             className={`text-base font-medium px-3 py-2 rounded-md transition-all ${
               currentPage === 'animation-details'
                 ? isScrolled
-                  ? 'text-white bg-white/20 backdrop-blur-sm'
+                  ? 'text-beige-900 bg-beige-200'
                   : 'text-beige-900 bg-beige-100'
                 : isScrolled 
-                  ? 'text-white/90 hover:text-white hover:bg-white/10' 
+                  ? 'text-beige-800 hover:text-beige-900 hover:bg-beige-100' 
                   : 'text-beige-800 hover:text-beige-900 hover:bg-beige-50'
             }`}
           >
@@ -65,10 +60,10 @@ function Navigation({ currentPage, setCurrentPage, language, setLanguage, t, isS
             className={`text-base font-medium px-3 py-2 rounded-md transition-all ${
               currentPage === 'community'
                 ? isScrolled
-                  ? 'text-white bg-white/20 backdrop-blur-sm'
+                  ? 'text-beige-900 bg-beige-200'
                   : 'text-beige-900 bg-beige-100'
                 : isScrolled 
-                  ? 'text-white/90 hover:text-white hover:bg-white/10' 
+                  ? 'text-beige-800 hover:text-beige-900 hover:bg-beige-100' 
                   : 'text-beige-800 hover:text-beige-900 hover:bg-beige-50'
             }`}
           >
@@ -81,7 +76,7 @@ function Navigation({ currentPage, setCurrentPage, language, setLanguage, t, isS
             onChange={(e) => setLanguage(e.target.value)}
             className={`text-sm rounded-md px-3 py-1 pr-8 cursor-pointer transition-all appearance-none focus:outline-none focus:ring-2 focus:ring-offset-1 ${
               isScrolled
-                ? 'bg-white/10 backdrop-blur-sm border border-white/30 text-white hover:bg-white/20 hover:border-white/50 focus:ring-white/50'
+                ? 'bg-beige-100 border border-beige-300 text-beige-900 hover:bg-beige-200 hover:border-beige-400 focus:ring-beige-400'
                 : 'bg-beige-50 border border-beige-300 text-beige-900 hover:bg-beige-100 hover:border-beige-400 focus:ring-beige-400'
             }`}
           >
@@ -90,7 +85,7 @@ function Navigation({ currentPage, setCurrentPage, language, setLanguage, t, isS
             <option value="hu" className="text-beige-900 bg-white">Hungarian</option>
           </select>
           <ChevronDown className={`absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none transition-colors ${
-            isScrolled ? 'text-white' : 'text-beige-700'
+            isScrolled ? 'text-beige-700' : 'text-beige-700'
           }`} />
         </div>
       </div>
