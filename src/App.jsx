@@ -182,7 +182,7 @@ function HomePage({ language, t }) {
       {/* Introduction Section */}
       <section className="max-w-3xl mx-auto px-6 py-24 text-center">
         <h2 className="text-3xl font-light mb-8 text-beige-900">{t.intro.title}</h2>
-        <div className="text-lg leading-relaxed text-beige-700 space-y-4 text-left">
+        <div className="text-lg leading-relaxed text-beige-700 space-y-4 text-center">
           {t.intro.text.split('\n\n').map((paragraph, idx) => (
             <p key={idx}>{paragraph}</p>
           ))}
