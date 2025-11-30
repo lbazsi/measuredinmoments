@@ -388,9 +388,9 @@ export default function MeasuredInMoments() {
       },
       postAnimation: {
         title: 'What is AI Safety?',
-        danger: 'Some text',
-        what: 'Some text',
-        essay: 'Some text about Keep The Future Human'
+        danger: 'AI Safety is a research field dedicated to understanding how advanced artificial intelligence systems behave, generalize, and interact with the world. It studies how models form internal representations, how they respond under distribution shift, and how their objectives can be reliably aligned with human intentions. The field combines insights from computer science, machine learning, cognitive science, interpretability, and security to develop frameworks that make AI systems predictable, transparent, and controllable as they grow more capable.',
+        what: 'Researchers in AI Safety investigate topics such as alignment, robustness, interpretability, evaluation, multi-agent dynamics, and long-term governance. They design methods for ensuring models follow intended goals, build tools to reveal hidden reasoning processes, create benchmarks that expose failure modes, and develop oversight mechanisms that remain effective even at high capability levels. In practice, AI Safety provides the methodologies, standards, and technical foundations needed to guide the development of increasingly powerful systems in a structured and disciplined way.',
+        essay: 'The essay Keep The Future Human warns that progress without direction risks shaping a future where human agency gradually erodes. It argues that the true danger is not sudden domination, but the slow drift of power from people to opaque systems and unaccountable institutions. Through this lens, AI development becomes not only a technical challenge but a societal responsibility: to design, regulate, and question these systems before they outpace our ability to guide them. The essay calls for intentionality—to ensure that our technologies amplify human purpose, rather than replace it—and invites us to reflect on what kind of future we want to build before it becomes inevitable.'
       },
       afterQuestion: 'What would you do differently after knowing the consequences and possibilities?',
       resources: {
