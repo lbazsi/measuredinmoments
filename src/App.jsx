@@ -182,7 +182,7 @@ function HomePage({ language, t }) {
       {/* Introduction Section */}
       <section className="max-w-3xl mx-auto px-6 py-24 text-center">
         <h2 className="text-3xl font-light mb-8 text-beige-900">{t.intro.title}</h2>
-        <div className="text-lg leading-relaxed text-beige-700 space-y-4 text-center">
+        <div className="text-lg leading-relaxed text-beige-700 space-y-4 text-left">
           {t.intro.text.split('\n\n').map((paragraph, idx) => (
             <p key={idx}>{paragraph}</p>
           ))}
@@ -254,7 +254,21 @@ function HomePage({ language, t }) {
             {t.postAnimation.what}
           </p>
           <p className="text-lg leading-relaxed text-beige-700">
-            {t.postAnimation.essay}
+            {t.postAnimation.essay.split('Keep The Future Human').map((part, idx, arr) => 
+              idx < arr.length - 1 ? (
+                <React.Fragment key={idx}>
+                  {part}
+                  <a 
+                    href="https://keepthefuturehuman.ai/essay/docs" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-beige-900 underline hover:text-beige-700"
+                  >
+                    Keep The Future Human
+                  </a>
+                </React.Fragment>
+              ) : part
+            )}
           </p>
         </div>
       </section>
